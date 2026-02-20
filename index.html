@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CC CHEKER PRO V1</title>
+
+<style>
+body{
+background:#020617;
+color:white;
+font-family:Arial;
+text-align:center;
+padding-top:40px;
+}
+
+.container{
+background:#111827;
+width:340px;
+margin:auto;
+padding:20px;
+border-radius:15px;
+}
+
+.logo{
+color:#22c55e;
+font-size:22px;
+margin-bottom:10px;
+}
+
+.status{
+margin-bottom:10px;
+color:#06b6d4;
+}
+
+textarea{
+width:100%;
+height:100px;
+background:#020617;
+color:white;
+border:none;
+border-radius:10px;
+padding:10px;
+margin-bottom:10px;
+}
+
+input{
+width:100%;
+padding:10px;
+border-radius:10px;
+border:none;
+margin-bottom:10px;
+background:#020617;
+color:white;
+}
+
+button{
+width:100%;
+padding:12px;
+background:#22c55e;
+border:none;
+border-radius:10px;
+color:white;
+}
+
+.result{
+margin-top:10px;
+color:#22c55e;
+}
+
+.footer{
+margin-top:30px;
+font-size:14px;
+color:#9ca3af;
+}
+
+.footer a{
+color:#06b6d4;
+text-decoration:none;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<div class="logo">CC CHEKER PRO V1</div>
+
+<div class="status" id="status"></div>
+
+<input type="text" id="prokey" placeholder="ENTER PRO KEY (OPTIONAL)">
+
+<textarea placeholder="ENTER DATA"></textarea>
+
+<button onclick="start()">START CHECK</button>
+
+<div class="result" id="result"></div>
+
+</div>
+
+
+<div class="footer">
+
+CONTACT OWNER 
+<a href="https://t.me/SHUVO_MAHMUD01" target="_blank">
+MR SHUVO AHAMMAD
+</a>
+
+<br><br>
+
+© 2026 DEV BY 
+<a href="https://t.me/boost_help_zone04" target="_blank">
+TRICK ZONE BOOST CENTER
+</a>
+
+</div>
+
+
+<script>
+
+let PRO_KEY = "SHUVO-PRO-2026";
+
+let now = new Date().getTime();
+
+let trial = localStorage.getItem("trial");
+
+if(!trial){
+localStorage.setItem("trial", now);
+trial = now;
+}
+
+let days = Math.floor((now - trial)/(1000*60*60*24));
+
+let pro = localStorage.getItem("pro");
+
+if(pro){
+let proDays = Math.floor((now - pro)/(1000*60*60*24));
+
+if(proDays <= 30){
+document.getElementById("status").innerHTML="PRO USER ("+(30-proDays)+" DAYS LEFT)";
+}else{
+localStorage.removeItem("pro");
+}
+}
+
+else{
+
+if(days <= 2){
+document.getElementById("status").innerHTML="FREE TRIAL ("+(2-days)+" DAYS LEFT)";
+}else{
+document.getElementById("status").innerHTML="TRIAL EXPIRED";
+}
+}
+
+function start(){
+
+let key = document.getElementById("prokey").value;
+
+if(key == PRO_KEY){
+localStorage.setItem("pro", new Date().getTime());
+document.getElementById("status").innerHTML="PRO ACTIVATED (30 DAYS)";
+return;
+}
+
+let trial = localStorage.getItem("trial");
+let now = new Date().getTime();
+let days = Math.floor((now - trial)/(1000*60*60*24));
+
+let pro = localStorage.getItem("pro");
+
+if(pro){
+let proDays = Math.floor((now - pro)/(1000*60*60*24));
+
+if(proDays <= 30){
+document.getElementById("result").innerHTML="CHECK SUCCESS ✔";
+return;
+}
+}
+
+if(days <= 2){
+document.getElementById("result").innerHTML="CHECK SUCCESS ✔";
+}else{
+document.getElementById("result").innerHTML="TRIAL EXPIRED ❌ ENTER PRO KEY";
+}
+
+}
+
+</script>
+
+</body>
+</html>
